@@ -1,0 +1,8 @@
+{
+    "domain": "desktop_monitor",
+    "name": "Desktop Monitor",
+    "documentation": "https://www.example.com",
+    "dependencies": [],
+    "codeowners": ["@cazbrat"],
+    "requirements": []
+  }
