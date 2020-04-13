@@ -1,17 +1,3 @@
-"""
-    configuration.yaml
-    sensor:
-      - platform: desktop_monitor
-(opt)   name: desktop_monitor
-        hosts:
-          - 192.168.1.35
-(opt)   port: 9999
-        resources:
-          - system
-          - cpu
-          - memory
-          - drive
-"""
 import logging
 import voluptuous as vol
 from datetime import timedelta
@@ -36,6 +22,7 @@ DEFAULT_PORT = 9999
 RESOURCES_TYPES = {
     "system": ["mdi:sensor"],
     "cpu": ["mdi:sensor"],
+    "lmsensor": ["mdi:sensor"],
     "memory": ["mdi:sensor"],
     "drive": ["mdi:sensor"]
 }
@@ -133,6 +120,7 @@ class DesktopMonitorSensor(Entity):
         await self._monitor.async_update()
         data = self._monitor.latest_data[self._resource]
         self._state = data[0][0]
+        self._attributes["state_description"] = data[0][1]
         unit_of_measurement = data[0][2]
         data.pop(0)
         for attribute in data:

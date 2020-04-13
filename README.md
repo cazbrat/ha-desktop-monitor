@@ -1,40 +1,45 @@
-# Desktop Remote Integration for Home Assistant
+# Desktop Monitor Integration for Home Assistant
 
-This is a integration for a quick lightweight API designed to expose the system's current metrics of a linux desktop as a simple JSON endpoint that your Home Assistant instance can query.
+This is a Home Assistant integration for the [Desktop Monitor](https://github.com/cazbrat/ha-desktop-monitor-api) API. With it, some current metrics of a Linux desktop are exposed.
 
-## Install
+## Install on Home Assistant
 To install the component, just clone and move ```desktop-monitor``` folder into ```custom_components``` directory.
-
 ```
 git clone https://github.com/cazbrat/ha-desktop-monitor.git
 mv custom_components/desktop_monitor <config_directory>/custom_components/
 ```
-
-Example configuration.yaml:
+And set it in configuration.yaml:
 ```
-# Example configuration.yaml entry
 sensor:
   - platform: desktop_remote
-    name: desktop_monitor
     hosts:
       - 192.168.1.35
-    port: 9999
     resources:
       - system
       - cpu
+      - lmsensor
       - memory
       - drive
+    port: 9999
+    name: desktop_monitor
 ```
-### Configuration Variables
-#### name
-(string)(optional) A name for sensor ```sensor.<name>_<hostname>_<resource>```
+### Configuration variables
 
 #### hosts
 (list)(required) The hostname or IP address to monitored
 
+#### resources
+(list)(required) The resources to monitored: ```system```, ```cpu```, ```lmsensor```, ```memory``` and ```drive```
+
+#### name
+(string)(optional) A name for sensor ```sensor.<name>_<hostname>_<resource>```. Default value: Desktop Monitor
 
 #### port
 (integer)(optional) The port of your desktop to monitored. Default value: 9999
 
-#### resources
-(list)(required) The resources to monitored: ```system```, ```cpu```, ```memory```, ```drive```
+
+## What is the idea
+Control the resources of the computers in my office, to avoid any damage or malfunction that may will be suffer
+
+## Collaboration
+yes please !: comments, problems, improvements, anything ...
